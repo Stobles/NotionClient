@@ -1,0 +1,138 @@
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  opacity: 0 !important;
+  transition: 0.3s;
+
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: white;
+
+  user-select: none;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px;
+  font-weight: 800;
+  color: black;
+}
+
+.swiper-button-next::after {
+  margin-left: 3px;
+}
+
+.swiper-button-prev::after {
+  margin-right: 3px;
+}
+
+.swiper:hover .swiper-button-prev {
+  opacity: 1 !important;
+}
+
+.swiper:hover .swiper-button-next {
+  opacity: 1 !important;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.swiper-pagination-bullet {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 150px;
+  height: 45px;
+  border: 1px solid rgb(0 0 0/4%);
+  border-radius: 10px;
+
+  background-color: #f2f2f2;
+  box-shadow: 0px 4px 18px rgb(0 0 0/4%),
+    0px 2.025px 7.84688px rgba(0, 0, 0, 0.027), 0px 0.8px 2.925px rgb(0 0 0/2%),
+    0px 0.175px 1.04062px rgba(0, 0, 0, 0.013);
+  opacity: 1;
+  cursor: pointer;
+
+  padding: 5px;
+}
+
+.bullet__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  overflow: hidden;
+}
+
+.bullet__img {
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+}
+
+.bullet__description{
+  display: none;
+}
+
+.bullet__title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+@media screen and (min-width: 768px) {
+  .swiper-pagination-bullet {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 240px;
+    height: 135px;
+    border: 1px solid rgb(0 0 0/4%);
+    border-radius: 10px;
+
+    background-color: #f2f2f2;
+    box-shadow: 0px 4px 18px rgb(0 0 0/4%),
+      0px 2.025px 7.84688px rgba(0, 0, 0, 0.027),
+      0px 0.8px 2.925px rgb(0 0 0/2%),
+      0px 0.175px 1.04062px rgba(0, 0, 0, 0.013);
+    opacity: 1;
+    cursor: pointer;
+
+    padding: 15px;
+  }
+
+  .bullet__title {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .bullet__description {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-clamp: 3;
+    box-orient: vertical;
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background-color: white;
+}

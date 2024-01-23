@@ -1,0 +1,16 @@
+export const logos = [
+  { img: "/images/Home/customers/figma-logo.png" },
+  { img: "/images/Home/customers/pixar-logo.png" },
+  { img: "/images/Home/customers/doordash-logo.png" },
+  { img: "/images/Home/customers/nike-logo.png" },
+  { img: "/images/Home/customers/amazon-logo.png" },
+  { img: "/images/Home/customers/pinterest-logo.png" },
+  { img: "/images/Home/customers/electric-logo.png" },
+  { img: "/images/Home/customers/uber-logo.png" },
+  { img: "/images/Home/customers/plaid-logo.png" },
+  { img: "/images/Home/customers/toyota-logo.png" },
+  { img: "/images/Home/customers/snowflake-logo.png" },
+  { img: "/images/Home/customers/headspace-logo.png" },
+  { img: "/images/Home/customers/angellist-logo.png" },
+  { img: "/images/Home/customers/robinhood-logo.png" },
+];

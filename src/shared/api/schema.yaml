@@ -1,0 +1,197 @@
+openapi: 3.0.0
+paths:
+  /users:
+    get:
+      operationId: UsersController_getUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+    patch:
+      operationId: UsersController_patchOne
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchUserDto'
+      responses:
+        '200':
+          description: ''
+  /auth/local/signup:
+    post:
+      operationId: AuthController_signUpLocal
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpLocalBodyDto'
+      responses:
+        '201':
+          description: ''
+  /auth/local/signin:
+    post:
+      operationId: AuthController_signInLocal
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInLocalBodyDto'
+      responses:
+        '200':
+          description: ''
+  /auth/verify/{id}:
+    get:
+      operationId: AuthController_verify
+      parameters: 
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: ''
+  /auth/google-logins/{from}:
+    get:
+      operationId: AuthController_googleAuth
+      parameters: 
+        - in: path
+          name: from
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: ''
+  /auth/google/callback:
+    get:
+      operationId: AuthController_googleAuthCallback
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /auth/logout:
+    post:
+      operationId: AuthController_logout
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /auth/refresh:
+    post:
+      operationId: AuthController_refreshTokens
+      parameters: []
+      responses:
+        '200':
+          description: ''
+  /auth/session:
+    get:
+      operationId: AuthController_getSessionInfo
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionInfoDto'
+  /documents:
+    post:
+      operationId: DocumentsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDocumentDto'
+      responses:
+        '201':
+          description: ''
+info:
+  title: Notion
+  description: ''
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  schemas:
+    PatchUserDto:
+      type: object
+      properties:
+        username:
+          type: string
+        avatar:
+          type: string
+        hashedRt:
+          type: string
+        isVerified:
+          type: boolean
+      required:
+        - username
+        - avatar
+        - hashedRt
+        - isVerified
+    SignUpLocalBodyDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@gmail.com
+        password:
+          type: string
+          example: '123456'
+      required:
+        - email
+        - password
+    SignInLocalBodyDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@gmail.com
+        password:
+          type: string
+          example: '123456'
+      required:
+        - email
+        - password
+    GetSessionInfoDto:
+      type: object
+      properties:
+        sub:
+          type: string
+        email:
+          type: string
+        username:
+          type: string
+        avatar:
+          type: string
+        iat:
+          type: number
+        lat:
+          type: number
+      required:
+        - sub
+        - email
+        - username
+        - avatar
+        - iat
+        - lat
+    CreateDocumentDto:
+      type: object
+      properties:
+        title:
+          type: string
+        parentId:
+          type: string
+      required:
+        - title
+        - parentId
