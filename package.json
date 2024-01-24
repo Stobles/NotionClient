@@ -27,7 +27,6 @@
     "lucide-react": "^0.292.0",
     "next": "13.5.3",
     "next-themes": "^0.2.1",
-    "plaiceholder": "^3.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
