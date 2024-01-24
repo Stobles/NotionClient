@@ -1,8 +1,6 @@
 "use client";
 
-import { RefAttributes, useEffect, useRef, useState } from "react";
-import { Swiper, SwiperRef, SwiperSlide, useSwiper } from "swiper/react";
-import { useMediaQuery } from "usehooks-ts";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
@@ -55,7 +53,7 @@ const Slider = () => {
               <Image
                 width={1000}
                 height={640}
-                src={slide.img}
+                src={slide.src}
                 alt={slide.name}
               />
             </SwiperSlide>

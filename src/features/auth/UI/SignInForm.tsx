@@ -34,7 +34,7 @@ export const SignInForm = () => {
                   {...field}
                 />
               </FormControl>
-              <FormMessage className="text-xs font-normal text-red-600" />
+              <FormMessage className="text-xs font-normal text-red-600 mt-1" />
             </FormItem>
           )}
         />
