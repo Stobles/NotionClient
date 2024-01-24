@@ -3,15 +3,15 @@ import withPlaiceholder from "@plaiceholder/next";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    SERVER_BASE_URL: "http://localhost:4000",
-    CLIENT_BASE_URL: "http://localhost:3000",
+    SERVER_BASE_URL: "https://api.stoble.ru",
+    CLIENT_BASE_URL: "https://stoble.ru",
   },
   reactStrictMode: true,
   rewrites() {
     return [
       {
         source: "/api/:path*",
-        destination: "http://localhost:4000/:path*",
+        destination: "https://api.stoble.ru/:path*",
       },
     ];
   },
