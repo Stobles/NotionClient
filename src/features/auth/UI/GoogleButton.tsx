@@ -32,8 +32,8 @@ export const GoogleButton = () => {
   const googleLogin = async () => {
     try {
       window.open(
-        `http://localhost:4000/auth/google-logins/documents`,
-        "_self"
+        `${process.env.SERVER_BASE_URL}/auth/google-logins/documents`,
+        "_self",
       );
     } catch (e) {
       console.log(e);
