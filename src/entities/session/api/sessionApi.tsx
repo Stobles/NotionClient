@@ -19,6 +19,7 @@ export function useSessionQuery() {
     queryFn: authControllerGetSessionInfo,
     retry: 0,
     staleTime: 1000 * 60 * 15,
+    refetchOnWindowFocus: false,
   });
 }
 
