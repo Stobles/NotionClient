@@ -2,7 +2,10 @@ import withPlaiceholder from "@plaiceholder/next";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  env: {},
+  env: {
+    SERVER_BASE_URL: "https://api.stoble.ru/",
+    CLIENT_BASE_URL: "https://localhost:3000",
+  },
   reactStrictMode: true,
   rewrites() {
     return [
