@@ -15,10 +15,12 @@ export default async function HomePageLayout({
   children: React.ReactNode;
 }) {
   const queryClient = new QueryClient();
+
   await queryClient.prefetchQuery({
     queryKey: sessionKeys.session.currentUser(),
     queryFn: authControllerGetSessionInfo,
   });
+
   return (
     <HomeLayout
       header={

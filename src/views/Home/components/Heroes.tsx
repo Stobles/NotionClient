@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { Button } from "@/shared/UI/Button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { ROUTES } from "@/shared/constants/route";
 
 const Heroes = () => {
   return (
@@ -15,9 +17,10 @@ const Heroes = () => {
           <h3 className="text-base sm:text-xl md:text-2xl font-medium">
             Notion is the connected workspace where better, faster work happens.
           </h3>
-          <Button>
-            Get Notion free
-            <ArrowRight className="h-4 w-4 ml-2" />
+          <Button asChild>
+            <Link href={ROUTES.DOCUMENTS}>
+              Get Notion free <ArrowRight className="h-4 w-4 ml-2" />
+            </Link>
           </Button>
         </div>
         <div className="flex flex-col items-center justify-center max-w-5xl">
