@@ -22,18 +22,20 @@ export const Header = ({ profile }: { profile?: React.ReactNode }) => {
       )}
     >
       <Logo className="flex" />
-      {session ? (
-        profile
-      ) : (
-        <div className="ml-auto md:justify-end justify-between w-fit flex items-center gap-x-2">
-          <Button asChild className="text-xs" variant="ghost">
-            <Link href={ROUTES.LOGIN}>Log in</Link>
-          </Button>
-          <Button asChild className="text-xs" variant="default">
-            <Link href={ROUTES.REGISTER}>Get notion</Link>
-          </Button>
-        </div>
-      )}
+      <div className="ml-auto md:justify-end justify-between w-fit flex items-center gap-x-2">
+        {session ? (
+          profile
+        ) : (
+          <>
+            <Button asChild className="text-xs" variant="ghost">
+              <Link href={ROUTES.LOGIN}>Log in</Link>
+            </Button>
+            <Button asChild className="text-xs" variant="default">
+              <Link href={ROUTES.REGISTER}>Get notion</Link>
+            </Button>
+          </>
+        )}
+      </div>
     </header>
   );
 };
