@@ -4,7 +4,7 @@ import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "Stobletion",
-  description: "The connected workspace where better, faster work happens.",
+  description: "Проект для портфолио 'Клон Notion'.",
   icons: {
     icon: [
       {
@@ -12,6 +12,19 @@ export const metadata: Metadata = {
         href: "/images/logo.png",
       },
     ],
+  },
+  openGraph: {
+    title: "Главная страница. Stobletion",
+    description: "Главная страница проекта для портфолио 'Клон Notion'.",
+    url: "https://stoble.ru",
+    images: [
+      {
+        url: "/images/logo.png",
+        width: 600,
+        height: 600,
+      },
+    ],
+    type: "website",
   },
 };
 
