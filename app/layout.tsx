@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     title: "Главная страница. Stobletion",
     description: "Главная страница проекта для портфолио 'Клон Notion'.",
     url: "https://stoble.ru",
+    siteName: "Stobletion",
     images: [
       {
         url: "/images/logo.png",
