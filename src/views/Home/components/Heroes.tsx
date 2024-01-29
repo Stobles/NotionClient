@@ -8,8 +8,8 @@ import { ROUTES } from "@/shared/constants/route";
 
 const Heroes = () => {
   return (
-    <div className="col-span-12">
-      <section className="flex flex-col items-center gap-10">
+    <section className="col-span-12">
+      <div className="flex flex-col items-center gap-10">
         <div className="flex flex-col items-center text-center space-y-4">
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold">
             Write, plan, share. <br /> With AI at your side.
@@ -35,8 +35,8 @@ const Heroes = () => {
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

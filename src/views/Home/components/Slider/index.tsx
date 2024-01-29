@@ -17,7 +17,7 @@ import Image from "next/image";
 
 const Slider = () => {
   return (
-    <div className="col-span-12 mb-28">
+    <section className="col-span-12 mb-28">
       <div className="pagination flex justify-center mt-2 md:mt-0 md:justify-between gap-1 md:gap-3 mb-4 flex-wrap md:flex-nowrap"></div>
       <div>
         <Swiper
@@ -60,7 +60,7 @@ const Slider = () => {
           ))}
         </Swiper>
       </div>
-    </div>
+    </section>
   );
 };
 

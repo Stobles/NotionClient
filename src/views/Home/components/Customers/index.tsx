@@ -5,8 +5,8 @@ import Image from "next/image";
 
 const Customers = () => {
   return (
-    <div className="col-span-12">
-      <section className="w-full flex flex-col items-center mb-28 text-center">
+    <section className="col-span-12">
+      <div className="w-full flex flex-col items-center mb-28 text-center">
         <div className="flex flex-col gap-2">
           <h2 className="text-3xl sm:text-4xl font-bold">
             Millions run on Notion every day
@@ -40,8 +40,8 @@ const Customers = () => {
             </div>
           ))}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
