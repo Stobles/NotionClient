@@ -1,5 +1,5 @@
 "use client";
 
-import { AuthLayout } from "@/views/Layouts";
+import { AuthLayout } from "@/shared/UI/Layouts/AuthLayout";
 
 export default AuthLayout;

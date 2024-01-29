@@ -1,13 +1,14 @@
 import { sessionKeys } from "@/entities/session/api/sessionApi";
-import { Navbar } from "@/views/Home";
+import { Header } from "@/widgets/Header";
 import { Footer } from "@/views/Home";
-import { HomeLayout } from "@/views/Layouts/HomeLayout";
+import { HomeLayout } from "@/shared/UI/Layouts/HomeLayout";
 import { authControllerGetSessionInfo } from "@/shared/api/generated";
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
+import { Profile } from "@/widgets/Profile/Profile";
 
 export default async function HomePageLayout({
   children,
@@ -25,7 +26,7 @@ export default async function HomePageLayout({
     <HomeLayout
       header={
         <HydrationBoundary state={dehydrate(queryClient)}>
-          <Navbar />
+          <Header profile={<Profile />} />
         </HydrationBoundary>
       }
       footer={<Footer />}
