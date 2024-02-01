@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "api:download": "wget http://localhost:4000/api-yaml -O ./src/shared/api/schema.yaml",
-    "api:generate": "orval"
+    "api:download": "wget http://localhost:4000/api-json -O ./src/shared/api/schema.json",
+    "api:generate": "npx swagger-typescript-api -p ./src/shared/api/schema.json -o ./src/shared/api -n api.ts --axios"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
