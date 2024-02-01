@@ -1,15 +1,11 @@
 "use client";
 
-import { useRef, ElementRef, useState, useEffect, useCallback } from "react";
+import { useRef, ElementRef } from "react";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
-import { useMediaQuery } from "usehooks-ts";
-import { usePathname } from "next/navigation";
 import { cn } from "@/shared/libs/shadcn-ui";
 import { useResponsiveSidebar } from "../hooks/useResponsiveSidebar";
 
 export const Navigation = () => {
-  const pathname = usePathname();
-
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const navbarRef = useRef<ElementRef<"div">>(null);
