@@ -6,7 +6,7 @@ import Link from "next/link";
 const VerifySuccess = () => {
   return (
     <div className="flex flex-col items-center gap-10">
-      <div className="w-[400px]">
+      <div className="w-full max-w-[400px]">
         <Image
           fill
           className="!relative"
@@ -14,7 +14,7 @@ const VerifySuccess = () => {
           alt="letter"
         />
       </div>
-      <Title>Вы успешно подтвердили свою почту.</Title>
+      <Title className="text-center">Вы успешно подтвердили свою почту.</Title>
       <Button asChild>
         <Link href="/login">Авторизоваться</Link>
       </Button>

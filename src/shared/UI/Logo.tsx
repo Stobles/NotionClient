@@ -24,7 +24,7 @@ const Logo = ({ className }: { className?: string }) => {
         alt="logo"
         className="dark:hidden"
       />
-      <p className={cn("font-semibold", font.className)}>Notion</p>
+      <p className={cn("font-semibold", font.className)}>Stobletion</p>
     </Link>
   );
 };
