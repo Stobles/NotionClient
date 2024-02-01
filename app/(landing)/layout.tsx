@@ -1,37 +1,17 @@
-import { sessionKeys } from "@/entities/session/api/sessionApi";
+"use client";
+
 import { Header } from "@/widgets/Header";
 import { Footer } from "@/views/Home";
 import { HomeLayout } from "@/shared/UI/Layouts/HomeLayout";
-import { authControllerGetSessionInfo } from "@/shared/api/generated";
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from "@tanstack/react-query";
 import { Profile } from "@/widgets/Profile/Profile";
+import { guestGuard } from "@/entities/session";
 
-export default async function HomePageLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: sessionKeys.session.currentUser(),
-    queryFn: authControllerGetSessionInfo,
-  });
-
+const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <HomeLayout
-      header={
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <Header profile={<Profile />} />
-        </HydrationBoundary>
-      }
-      footer={<Footer />}
-    >
+    <HomeLayout header={<Header profile={<Profile />} />} footer={<Footer />}>
       {children}
     </HomeLayout>
   );
-}
+};
+
+export default guestGuard(HomePageLayout);
