@@ -14,7 +14,7 @@ function authGuard<P>(Component: (props: P) => ReactElement) {
 
     if (data) return <Component {...props} />;
 
-    if (isError) router.replace(ROUTES.REGISTER);
+    if (isError) router.replace(ROUTES.HOME);
 
     return <PageLoader />;
   };
