@@ -7,8 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+<<<<<<< Updated upstream
     "api:download": "wget http://localhost:4000/api-json -O ./src/shared/api/schema.json",
     "api:generate": "npx swagger-typescript-api -p ./src/shared/api/schema.json -o ./src/shared/api -n api.ts --axios"
+=======
+    "api:download": "wget http://localhost:4000/api-yaml -O ./src/shared/api/schema.yaml",
+    "api:generate": "orval",
+    "test": "jest",
+    "test:watch": "jest --watchAll"
+>>>>>>> Stashed changes
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -41,8 +48,14 @@
     "zustand": "^4.4.7"
   },
   "devDependencies": {
+<<<<<<< Updated upstream
     "@testing-library/jest-dom": "^6.4.1",
     "@testing-library/react": "^14.2.0",
+=======
+    "@testing-library/jest-dom": "^6.3.0",
+    "@testing-library/react": "^14.1.2",
+    "@testing-library/user-event": "^14.5.2",
+>>>>>>> Stashed changes
     "@trunkio/launcher": "^1.2.7",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -51,12 +64,18 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
+<<<<<<< Updated upstream
+=======
+    "eslint-plugin-jest-dom": "^5.1.0",
+    "eslint-plugin-testing-library": "^6.2.0",
+>>>>>>> Stashed changes
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "orval": "^6.21.0",
     "postcss": "^8",
     "prettier": "^3.1.0",
     "tailwindcss": "^3.3.0",
+    "ts-jest": "^29.1.2",
     "typescript": "^5"
   }
 }
