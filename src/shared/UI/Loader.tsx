@@ -1,7 +1,9 @@
+import { cn } from "../libs/shadcn-ui";
+
 export const Loader = ({ className }: { className?: string }) => {
   return (
     <svg
-      className={className}
+      className={cn("text-gray-400 w-8 h-8", className)}
       xmlns="http://www.w3.org/2000/svg"
       width="32"
       height="32"

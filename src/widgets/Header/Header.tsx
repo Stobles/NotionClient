@@ -8,6 +8,7 @@ import { useScrollTop } from "@/shared/hooks/useScrollTop";
 import { cn } from "@/shared/libs/shadcn-ui";
 import { Button } from "@/shared/UI/Button";
 import Logo from "@/shared/UI/Logo";
+import { Actions } from "./UI/Actions";
 
 export const Header = ({ profile }: { profile?: React.ReactNode }) => {
   const isScrolled = useScrollTop();
@@ -23,18 +24,7 @@ export const Header = ({ profile }: { profile?: React.ReactNode }) => {
     >
       <Logo className="flex" />
       <div className="ml-auto md:justify-end justify-between w-fit flex items-center gap-x-2">
-        {session ? (
-          profile
-        ) : (
-          <>
-            <Button asChild className="text-xs" variant="ghost">
-              <Link href={ROUTES.LOGIN}>Log in</Link>
-            </Button>
-            <Button asChild className="text-xs" variant="default">
-              <Link href={ROUTES.REGISTER}>Get notion</Link>
-            </Button>
-          </>
-        )}
+        {session ? profile : <Actions />}
       </div>
     </header>
   );
