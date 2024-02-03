@@ -74,6 +74,7 @@ export const useResponsiveSidebar = (
       setIsResetting(true);
 
       sidebarRef.current.style.width = "0";
+      sidebarRef.current.style.padding = "0";
       navbarRef.current.style.setProperty("width", "100%");
       navbarRef.current.style.setProperty("left", "0");
       setTimeout(() => setIsResetting(false), 300);

@@ -3,22 +3,26 @@ import { authControllerLogout } from "@/shared/api/generated";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
-export const useLogout = () => {
+export const useSignOut = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const signOut = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationKey: sessionKeys.mutation.logout(),
-    mutationFn: authControllerLogout,
+    mutationFn: () => authControllerLogout(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["currentUser"] });
-      queryClient.removeQueries({ queryKey: ["currentUser"] });
+      queryClient.invalidateQueries({
+        queryKey: sessionKeys.session.currentUser(),
+      });
+      queryClient.removeQueries({
+        queryKey: sessionKeys.session.currentUser(),
+      });
       router.refresh();
     },
   });
 
   return {
-    logout: signOut.mutate,
-    isLoading: signOut.isPending,
+    signOut: mutateAsync,
+    isLoading: isPending,
   };
 };

@@ -1,1 +1,1 @@
-export * from './api/logout';
+export * from "./api/signOut";

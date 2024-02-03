@@ -2,17 +2,22 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
-  theme: {   
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
+  theme: {
     container: {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        xs: "420px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
       },
     },
     extend: {
@@ -24,6 +29,9 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
+          second: "hsl(var(--primary-second))",
+          secondForeground: "hsl(var(--primary-second-foreground))",
+          third: "hsl(var(--primary-third))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -71,10 +79,11 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       boxShadow: {
-        'slider': '0px 0px 10px 1px rgba(0, 0, 0, 0.1)',
-        'danger': 'rgba(15, 15, 15, 0.1) 0px 1px 2px, rgba(235, 87, 87, 0.3) 0px 0px 0px 1px inset'
-      }
+        slider: "0px 0px 10px 1px rgba(0, 0, 0, 0.1)",
+        danger:
+          "rgba(15, 15, 15, 0.1) 0px 1px 2px, rgba(235, 87, 87, 0.3) 0px 0px 0px 1px inset",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};
