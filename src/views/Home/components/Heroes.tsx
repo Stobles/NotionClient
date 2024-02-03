@@ -19,7 +19,7 @@ const Heroes = () => {
           </h3>
           <Button asChild>
             <Link href={ROUTES.DOCUMENTS}>
-              Get Notion free <ArrowRight className="h-4 w-4 ml-2" />
+              Go to Stobletion <ArrowRight className="h-4 w-4 ml-2" />
             </Link>
           </Button>
         </div>

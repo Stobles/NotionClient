@@ -4,6 +4,26 @@ import { useRef, ElementRef } from "react";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { cn } from "@/shared/libs/shadcn-ui";
 import { useResponsiveSidebar } from "../hooks/useResponsiveSidebar";
+import { Profile } from "@/widgets/Profile/Profile";
+
+const NavigationItem = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        "flex items-center justify-between py-2 w-full rounded hover:bg-accent transition-colors",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+};
 
 export const Navigation = () => {
   const isResizingRef = useRef(false);
@@ -24,22 +44,28 @@ export const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[50]",
+          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 p-1 flex-col z-[50]",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0",
         )}
       >
-        <div
-          role="button"
-          onClick={collapse}
-          className={cn(
-            "h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
-            isMobile && "opacity-100",
-          )}
-        >
-          <ChevronsLeft className="h-6 w-6" />
-        </div>
-        <div className="w-[80%] z-[100] py-2 mx-2">Авторизован</div>
+        <NavigationItem className="">
+          <div className="px-2">
+            <Profile isFull />
+          </div>
+          <div className="mr-3">
+            <div
+              role="button"
+              onClick={collapse}
+              className={cn(
+                "h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 opacity-0 group-hover/sidebar:opacity-100 transition",
+                isMobile && "opacity-100",
+              )}
+            >
+              <ChevronsLeft className="h-6 w-6" />
+            </div>
+          </div>
+        </NavigationItem>
 
         <div className="mt-4">
           <p>Documents</p>
@@ -48,7 +74,7 @@ export const Navigation = () => {
         <div
           onMouseDown={handleMouseDown}
           onClick={resetWidth}
-          className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0 z-1"
+          className="opacity-0 hover:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0 z-1"
         />
       </aside>
       <div
