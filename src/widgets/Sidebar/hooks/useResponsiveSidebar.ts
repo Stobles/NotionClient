@@ -58,6 +58,7 @@ export const useResponsiveSidebar = (
       setIsResetting(true);
 
       sidebarRef.current.style.width = isMobile ? "100%" : "270px";
+      sidebarRef.current.style.padding = "4px";
       navbarRef.current.style.setProperty(
         "width",
         isMobile ? "0" : "calc(100% - 270px)",

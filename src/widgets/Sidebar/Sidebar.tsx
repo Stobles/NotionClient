@@ -3,29 +3,12 @@
 import { useRef, ElementRef } from "react";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { cn } from "@/shared/libs/shadcn-ui";
-import { useResponsiveSidebar } from "../hooks/useResponsiveSidebar";
+import { useResponsiveSidebar } from "./hooks/useResponsiveSidebar";
 import { Profile } from "@/widgets/Profile/Profile";
+import { SidebarItem } from "./UI/SidebarItem";
+import { navActions } from "@/shared/constants/navActions";
 
-const NavigationItem = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className: string;
-}) => {
-  return (
-    <div
-      className={cn(
-        "flex items-center justify-between py-2 w-full rounded hover:bg-accent transition-colors",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
-};
-
-export const Navigation = () => {
+export const Sidebar = () => {
   const isResizingRef = useRef(false);
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const navbarRef = useRef<ElementRef<"div">>(null);
@@ -49,8 +32,8 @@ export const Navigation = () => {
           isMobile && "w-0",
         )}
       >
-        <NavigationItem className="">
-          <div className="px-2">
+        <SidebarItem className="justify-between py-2">
+          <div>
             <Profile isFull />
           </div>
           <div className="mr-3">
@@ -65,7 +48,14 @@ export const Navigation = () => {
               <ChevronsLeft className="h-6 w-6" />
             </div>
           </div>
-        </NavigationItem>
+        </SidebarItem>
+
+        {navActions.map(({ Icon, title }) => (
+          <SidebarItem className="text-primary-second gap-2">
+            <Icon size={15} />
+            <div>{title}</div>
+          </SidebarItem>
+        ))}
 
         <div className="mt-4">
           <p>Documents</p>
