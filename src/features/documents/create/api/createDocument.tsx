@@ -1,4 +1,4 @@
-import { articleKeys } from "@/entities/article";
+import { documentKeys } from "@/entities/document";
 import {
   CreateDocumentDto,
   documentsControllerCreate,
@@ -10,7 +10,7 @@ export const useCreateDocument = () => {
   const queryClient = useQueryClient();
 
   const create = useMutation({
-    mutationKey: articleKeys.mutation.create(),
+    mutationKey: documentKeys.mutation.create(),
     mutationFn: (document: CreateDocumentDto) =>
       documentsControllerCreate(document),
     onError: () => {
@@ -18,8 +18,8 @@ export const useCreateDocument = () => {
     },
     onSuccess() {
       toast.success("Документ успешно создан");
-      queryClient.invalidateQueries({ queryKey: articleKeys.articles.root });
-      queryClient.removeQueries({ queryKey: articleKeys.articles.root });
+      queryClient.invalidateQueries({ queryKey: documentKeys.document.root });
+      queryClient.removeQueries({ queryKey: documentKeys.document.root });
     },
   });
 

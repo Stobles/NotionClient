@@ -48,24 +48,24 @@ paths:
   /auth/verify/{id}:
     get:
       operationId: AuthController_verify
-      parameters: 
-        - in: path
-          name: id
-          schema:
-            type: integer
+      parameters:
+        - name: id
           required: true
+          in: path
+          schema:
+            type: string
       responses:
         '200':
           description: ''
   /auth/google-logins/{from}:
     get:
       operationId: AuthController_googleAuth
-      parameters: 
-        - in: path
-          name: from
-          schema:
-            type: integer
+      parameters:
+        - name: from
           required: true
+          in: path
+          description: declare where to redirect user after success login
+          schema: {}
       responses:
         '200':
           description: ''
@@ -114,6 +114,45 @@ paths:
       responses:
         '201':
           description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DocumentDto'
+    get:
+      operationId: DocumentsController_getAll
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentDto'
+  /documents/findByTitle:
+    get:
+      operationId: DocumentsController_getByTitle
+      parameters:
+        - name: title
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: limit
+          required: true
+          in: query
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentDto'
 info:
   title: Notion
   description: ''
@@ -195,3 +234,48 @@ components:
       required:
         - title
         - parentId
+    DocumentDto:
+      type: object
+      properties:
+        id:
+          type: string
+          example: '2'
+        title:
+          type: string
+          example: Document title
+        content:
+          type: string
+          example: some_content
+        coverImage:
+          type: string
+          example: link_to_image
+        icon:
+          type: string
+          example: link_to_icon
+        parentId:
+          type: string
+          example: '1'
+        isPublished:
+          type: boolean
+          example: false
+        isArchived:
+          type: boolean
+          example: false
+        createdAt:
+          format: date-time
+          type: string
+          example: '2014-02-05'
+        userId:
+          type: string
+          example: '1'
+      required:
+        - id
+        - title
+        - content
+        - coverImage
+        - icon
+        - parentId
+        - isPublished
+        - isArchived
+        - createdAt
+        - userId

@@ -3,4 +3,5 @@ export const ROUTES = {
   LOGIN: "/login",
   REGISTER: "/signup",
   DOCUMENTS: "/documents",
+  DOCUMENT: (id: string) => `documents/${id}`,
 };

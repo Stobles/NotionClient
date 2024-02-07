@@ -33,7 +33,7 @@ export const useResponsiveSidebar = (
 
     let newWidth = e.clientX;
 
-    if (newWidth < 240) newWidth = 240;
+    if (newWidth < 270) newWidth = 270;
     if (newWidth > 480) newWidth = 480;
 
     if (sidebarRef.current && navbarRef.current) {
@@ -58,11 +58,12 @@ export const useResponsiveSidebar = (
       setIsResetting(true);
 
       sidebarRef.current.style.width = isMobile ? "100%" : "270px";
+      sidebarRef.current.style.padding = "4px";
       navbarRef.current.style.setProperty(
         "width",
         isMobile ? "0" : "calc(100% - 270px)",
       );
-      navbarRef.current.style.setProperty("left", isMobile ? "100%" : "270px");
+      navbarRef.current.style.setProperty("left", isMobile ? "50%" : "270px");
 
       setTimeout(() => setIsResetting(false), 300);
     }
@@ -75,6 +76,7 @@ export const useResponsiveSidebar = (
 
       sidebarRef.current.style.width = "0";
       sidebarRef.current.style.padding = "0";
+
       navbarRef.current.style.setProperty("width", "100%");
       navbarRef.current.style.setProperty("left", "0");
       setTimeout(() => setIsResetting(false), 300);

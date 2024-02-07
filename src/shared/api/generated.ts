@@ -6,8 +6,26 @@
  */
 import { createInstance } from "./api-instance";
 import type { BodyType } from "./api-instance";
+export type SearchParams = {
+  title: string;
+  limit: number;
+};
+
+export interface DocumentDto {
+  content: string;
+  coverImage: string;
+  createdAt: string;
+  icon: string;
+  id: string;
+  isArchived: boolean;
+  isPublished: boolean;
+  parentId: string;
+  title: string;
+  userId: string;
+}
+
 export interface CreateDocumentDto {
-  parentId?: string;
+  parentId: string | null;
   title: string;
 }
 
@@ -97,7 +115,7 @@ export const authControllerSignInLocal = (
 };
 
 export const authControllerVerify = (
-  id: number,
+  id: string,
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<void>(
@@ -107,7 +125,7 @@ export const authControllerVerify = (
 };
 
 export const authControllerGoogleAuth = (
-  from: number,
+  from: unknown,
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<void>(
@@ -153,13 +171,32 @@ export const documentsControllerCreate = (
   createDocumentDto: BodyType<CreateDocumentDto>,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<void>(
+  return createInstance<DocumentDto>(
     {
       url: `/documents`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: createDocumentDto,
     },
+    options,
+  );
+};
+
+export const documentsControllerGetAll = (
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<DocumentDto[]>(
+    { url: `/documents`, method: "GET" },
+    options,
+  );
+};
+
+export const documentsControllerGetByTitle = (
+  params: SearchParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<DocumentDto[]>(
+    { url: `/documents/findByTitle`, method: "GET", params },
     options,
   );
 };
@@ -196,4 +233,10 @@ export type AuthControllerGetSessionInfoResult = NonNullable<
 >;
 export type DocumentsControllerCreateResult = NonNullable<
   Awaited<ReturnType<typeof documentsControllerCreate>>
+>;
+export type DocumentsControllerGetAllResult = NonNullable<
+  Awaited<ReturnType<typeof documentsControllerGetAll>>
+>;
+export type DocumentsControllerGetByTitleResult = NonNullable<
+  Awaited<ReturnType<typeof documentsControllerGetByTitle>>
 >;
