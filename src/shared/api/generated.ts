@@ -6,10 +6,10 @@
  */
 import { createInstance } from "./api-instance";
 import type { BodyType } from "./api-instance";
-export interface SearchParams {
+export type SearchParams = {
   title: string;
   limit: number;
-}
+};
 
 export interface DocumentDto {
   content: string;
@@ -25,7 +25,7 @@ export interface DocumentDto {
 }
 
 export interface CreateDocumentDto {
-  parentId: string;
+  parentId: string | null;
   title: string;
 }
 

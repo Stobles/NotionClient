@@ -3,9 +3,7 @@ import {
   documentsControllerGetAll,
   documentsControllerGetByTitle,
 } from "@/shared/api/generated";
-import { useDebounce } from "@/shared/hooks/useDebounce";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 
 export const documentKeys = {
   documents: {
