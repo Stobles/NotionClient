@@ -1,7 +1,7 @@
 "use client";
 
 import { authGuard } from "@/entities/session";
-import { Sidebar } from "@/widgets/Sidebar";
+import { Sidebar } from "@/views/Documents/components/Sidebar";
 import { MainLayout } from "@/shared/UI/Layouts/MainLayout";
 
 const MainPageLayout = ({ children }: { children: React.ReactNode }) => {
