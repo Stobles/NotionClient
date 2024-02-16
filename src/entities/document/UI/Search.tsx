@@ -1,68 +1,14 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FileIcon, SearchIcon } from "lucide-react";
 
-import { useSessionQuery } from "@/entities/session/api/sessionApi";
-import { useDocumentsByTitleQuery } from "../";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "@/shared/UI/Dialog";
-import { Input } from "@/shared/UI/Input";
+import { Dialog, DialogContent, DialogTrigger } from "@/shared/UI/Dialog";
 import { ListItem } from "@/shared/UI/ListItem";
-import { Separator } from "@/shared/UI/Separator";
 import { Tooltip } from "@/shared/UI/Tooltip";
 
 import "tippy.js/dist/tippy.css";
 import { DocumentDto } from "@/shared/api/generated";
-import { useDebounce } from "@/shared/hooks/useDebounce";
-
-const SearchInput = ({
-  setDocuments,
-}: {
-  setDocuments: Dispatch<DocumentDto[]>;
-}) => {
-  const [title, setTitle] = useState("");
-  const [term, setTerm] = useState("");
-  const { data: session } = useSessionQuery();
-  const { data: documents } = useDocumentsByTitleQuery({
-    title: term,
-    limit: 10,
-  });
-  const debounce = useDebounce((title: string) => setTerm(title), 300);
-
-  useEffect(() => debounce(title), [title]);
-
-  useEffect(() => {
-    if (documents) setDocuments(documents);
-  }, [documents]);
-  return (
-    <DialogHeader className="space-y-0">
-      <div className="flex items-center w-full h-12 px-3">
-        <div className="mr-1.5">
-          <SearchIcon className="text-primary-second/70" size={18} />
-        </div>
-        <Input
-          value={title}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setTitle(e.target.value);
-          }}
-          placeholder={`Search ${session?.username}'s Notion`}
-          className="border-0 px-0 focus-visible:ring-0 text-base xs:text-lg placeholder:text-primary-second/50"
-        />
-      </div>
-      <Separator />
-    </DialogHeader>
-  );
-};
+import { SearchInput } from "./SearchInput";
 
 const SearchContent = () => {
   const [documents, setDocuments] = useState<DocumentDto[]>([]);
