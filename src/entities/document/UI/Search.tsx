@@ -1,68 +1,15 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { FileIcon, SearchIcon } from "lucide-react";
 
-import { useSessionQuery } from "@/entities/session/api/sessionApi";
-import { useDocumentsByTitleQuery } from "../";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTrigger,
-} from "@/shared/UI/Dialog";
-import { Input } from "@/shared/UI/Input";
+import { Dialog, DialogContent, DialogTrigger } from "@/shared/UI/Dialog";
+import { DocumentDto } from "@/shared/api/generated";
+import { SearchInput } from "./SearchInput";
+import { formatTimeToNow } from "../utils/formatDate";
 import { ListItem } from "@/shared/UI/ListItem";
-import { Separator } from "@/shared/UI/Separator";
 import { Tooltip } from "@/shared/UI/Tooltip";
 
 import "tippy.js/dist/tippy.css";
-import { DocumentDto } from "@/shared/api/generated";
-import { useDebounce } from "@/shared/hooks/useDebounce";
-
-const SearchInput = ({
-  setDocuments,
-}: {
-  setDocuments: Dispatch<DocumentDto[]>;
-}) => {
-  const [title, setTitle] = useState("");
-  const [term, setTerm] = useState("");
-  const { data: session } = useSessionQuery();
-  const { data: documents } = useDocumentsByTitleQuery({
-    title: term,
-    limit: 10,
-  });
-  const debounce = useDebounce((title: string) => setTerm(title), 300);
-
-  useEffect(() => debounce(title), [title]);
-
-  useEffect(() => {
-    if (documents) setDocuments(documents);
-  }, [documents]);
-  return (
-    <DialogHeader className="space-y-0">
-      <div className="flex items-center w-full h-12 px-3">
-        <div className="mr-1.5">
-          <SearchIcon className="text-primary-second/70" size={18} />
-        </div>
-        <Input
-          value={title}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setTitle(e.target.value);
-          }}
-          placeholder={`Search ${session?.username}'s Notion`}
-          className="border-0 px-0 focus-visible:ring-0 text-base xs:text-lg placeholder:text-primary-second/50"
-        />
-      </div>
-      <Separator />
-    </DialogHeader>
-  );
-};
 
 const SearchContent = () => {
   const [documents, setDocuments] = useState<DocumentDto[]>([]);
@@ -76,19 +23,21 @@ const SearchContent = () => {
         <ul className="flex flex-col gap-2">
           {documents.map((doc) => {
             return (
-              <li className="mx-1">
+              <li key={doc.id} className="mx-1">
                 <ListItem
                   Icon={FileIcon}
+                  emojiSrc={doc.icon}
                   title={doc.title}
                   className="py-2.5"
-                  onClick={() => router.push(doc.id)}
+                  onClick={() => router.push(`/documents/${doc.id}`)}
+                  updatedTime={formatTimeToNow(new Date(doc.updatedAt))}
                 />
               </li>
             );
           })}
         </ul>
       ) : (
-        <div className="flex flex-col justify-center items-center text-sm text-primary-second">
+        <div className="flex flex-col justify-center h-full items-center text-sm text-primary-second">
           <h6 className="font-medium">Нет результатов</h6>
           <p className="text-primary-third">
             Некоторые страницы могут находиться в корзине

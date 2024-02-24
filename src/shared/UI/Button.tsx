@@ -21,21 +21,22 @@ const buttonVariants = cva(
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "hover:bg-accent-dark",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-8 px-4 py-2 rounded-sm",
         sm: "h-7 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+        xs: "h-10 w-10",
+        icon: "h-5 w-5",
       },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -56,7 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : "button";
     return (
@@ -68,7 +69,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {isLoading ? <Loader className="h-4 w-4" /> : children}
       </Comp>
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

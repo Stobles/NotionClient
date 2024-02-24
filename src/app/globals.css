@@ -22,7 +22,7 @@ body,
     --primary: 0 0% 9%;
     --primary-second: 0 0% 50%;
     --primary-second-dark: 0 0% 35%;
-    --primary-third: 0 0% 58%;
+    --primary-third: 0 0% 65%;
     --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 97.5%;
@@ -32,6 +32,7 @@ body,
     --muted-foreground: 0 0% 45.1%;
 
     --accent: 0 0% 93%;
+    --accent-dark: 0 0% 87%;
     --accent-foreground: 0 0% 9%;
 
     --destructive: 0 84.2% 60.2%;
@@ -84,6 +85,24 @@ body,
 @layer base {
   * {
     @apply border-border;
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #ededed;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #bfbfbf;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
   }
 
   *:focus-visible {
