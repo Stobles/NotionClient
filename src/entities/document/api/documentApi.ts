@@ -1,6 +1,8 @@
 import {
-  SearchParams,
+  SearchByTitleParams,
+  SearchByParentParams,
   documentsControllerGetAll,
+  documentsControllerGetByParentId,
   documentsControllerGetByTitle,
 } from "@/shared/api/generated";
 import { useQuery } from "@tanstack/react-query";
@@ -8,14 +10,15 @@ import { useQuery } from "@tanstack/react-query";
 export const documentKeys = {
   documents: {
     root: ["documents"],
+    parent: (parentId: string) => [...documentKeys.documents.root, parentId],
     search: (term: string) => [...documentKeys.documents.root, term],
   },
   document: {
     root: ["document"],
-    slug: (slug: string) => [...documentKeys.document.root, slug],
   },
   mutation: {
     create: () => [...documentKeys.document.root, "create"],
+    update: () => [...documentKeys.document.root, "update"],
   },
 };
 
@@ -26,7 +29,14 @@ export function useDocumentsQuery() {
   });
 }
 
-export function useDocumentsByTitleQuery(params: SearchParams) {
+export function useDocumentsByParentQuery(params: SearchByParentParams) {
+  return useQuery({
+    queryKey: documentKeys.documents.parent(params.parentId),
+    queryFn: () => documentsControllerGetByParentId(params),
+  });
+}
+
+export function useDocumentsByTitleQuery(params: SearchByTitleParams) {
   return useQuery({
     queryKey: documentKeys.documents.search(params.title),
     queryFn: () => documentsControllerGetByTitle(params),

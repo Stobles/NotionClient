@@ -3,12 +3,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { FileIcon, SearchIcon } from "lucide-react";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/shared/UI/Dialog";
+import { DocumentDto } from "@/shared/api/generated";
+import { SearchInput } from "./SearchInput";
+import { formatTimeToNow } from "../utils/formatDate";
 import { ListItem } from "@/shared/UI/ListItem";
 import { Tooltip } from "@/shared/UI/Tooltip";
 
 import "tippy.js/dist/tippy.css";
-import { DocumentDto } from "@/shared/api/generated";
-import { SearchInput } from "./SearchInput";
 
 const SearchContent = () => {
   const [documents, setDocuments] = useState<DocumentDto[]>([]);
@@ -22,19 +23,21 @@ const SearchContent = () => {
         <ul className="flex flex-col gap-2">
           {documents.map((doc) => {
             return (
-              <li className="mx-1">
+              <li key={doc.id} className="mx-1">
                 <ListItem
                   Icon={FileIcon}
+                  emojiSrc={doc.icon}
                   title={doc.title}
                   className="py-2.5"
-                  onClick={() => router.push(doc.id)}
+                  onClick={() => router.push(`/documents/${doc.id}`)}
+                  updatedTime={formatTimeToNow(new Date(doc.updatedAt))}
                 />
               </li>
             );
           })}
         </ul>
       ) : (
-        <div className="flex flex-col justify-center items-center text-sm text-primary-second">
+        <div className="flex flex-col justify-center h-full items-center text-sm text-primary-second">
           <h6 className="font-medium">Нет результатов</h6>
           <p className="text-primary-third">
             Некоторые страницы могут находиться в корзине

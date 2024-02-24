@@ -6,15 +6,34 @@
  */
 import { createInstance } from "./api-instance";
 import type { BodyType } from "./api-instance";
-export type SearchParams = {
+export type SearchByTitleParams = {
   title: string;
   limit: number;
 };
+
+export type SearchByParentParams = {
+  parentId: string;
+};
+
+export type UpdateParams = {
+  id: string;
+};
+
+export interface UpdateDocumentDto {
+  content?: string;
+  coverImage?: string;
+  icon?: string;
+  isArchived?: boolean;
+  isPublished?: boolean;
+  parentId?: string;
+  title?: string;
+}
 
 export interface DocumentDto {
   content: string;
   coverImage: string;
   createdAt: string;
+  updatedAt: string;
   icon: string;
   id: string;
   isArchived: boolean;
@@ -25,7 +44,7 @@ export interface DocumentDto {
 }
 
 export interface CreateDocumentDto {
-  parentId: string | null;
+  parentId?: string;
   title: string;
 }
 
@@ -182,6 +201,23 @@ export const documentsControllerCreate = (
   );
 };
 
+export const documentsControllerUpdate = (
+  updateDocumentDto: BodyType<UpdateDocumentDto>,
+  params: UpdateParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    {
+      url: `/documents`,
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      data: updateDocumentDto,
+      params,
+    },
+    options,
+  );
+};
+
 export const documentsControllerGetAll = (
   options?: SecondParameter<typeof createInstance>,
 ) => {
@@ -191,8 +227,18 @@ export const documentsControllerGetAll = (
   );
 };
 
+export const documentsControllerGetByParentId = (
+  params: SearchByParentParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<DocumentDto[]>(
+    { url: `/documents/findByParent`, method: "GET", params },
+    options,
+  );
+};
+
 export const documentsControllerGetByTitle = (
-  params: SearchParams,
+  params: SearchByTitleParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<DocumentDto[]>(
@@ -234,8 +280,14 @@ export type AuthControllerGetSessionInfoResult = NonNullable<
 export type DocumentsControllerCreateResult = NonNullable<
   Awaited<ReturnType<typeof documentsControllerCreate>>
 >;
+export type DocumentsControllerUpdateResult = NonNullable<
+  Awaited<ReturnType<typeof documentsControllerUpdate>>
+>;
 export type DocumentsControllerGetAllResult = NonNullable<
   Awaited<ReturnType<typeof documentsControllerGetAll>>
+>;
+export type DocumentsControllerGetByParentIdResult = NonNullable<
+  Awaited<ReturnType<typeof documentsControllerGetByParentId>>
 >;
 export type DocumentsControllerGetByTitleResult = NonNullable<
   Awaited<ReturnType<typeof documentsControllerGetByTitle>>

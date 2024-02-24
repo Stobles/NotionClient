@@ -2,9 +2,12 @@ import { Metadata } from "next";
 import { App } from "@/app";
 import "@/app/globals.css";
 
+const clientURL = process.env.CLIENT_BASE_URL;
+
 export const metadata: Metadata = {
   title: "Stobletion",
   description: "Проект для портфолио 'Клон Notion'.",
+  metadataBase: new URL(clientURL || "http://localhost:3000"),
   icons: {
     icon: [
       {
@@ -16,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Главная страница. Stobletion",
     description: "Главная страница проекта для портфолио 'Клон Notion'.",
-    url: "https://stoble.ru",
+    url: clientURL,
     images: [
       {
         url: "/images/logo.png",

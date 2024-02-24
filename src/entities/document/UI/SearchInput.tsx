@@ -28,7 +28,7 @@ export const SearchInput = ({
     if (documents) setDocuments(documents);
   }, [documents]);
   return (
-    <DialogHeader className="space-y-0">
+    <DialogHeader className="space-y-0 border-b-[1px]">
       <div className="flex items-center w-full h-12 px-3">
         <div className="mr-1.5">
           <SearchIcon className="text-primary-second/70" size={18} />
@@ -42,7 +42,6 @@ export const SearchInput = ({
           className="border-0 px-0 focus-visible:ring-0 text-base xs:text-lg placeholder:text-primary-second/50"
         />
       </div>
-      <Separator />
     </DialogHeader>
   );
 };

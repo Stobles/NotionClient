@@ -6,13 +6,6 @@ import { cn } from "@/shared/libs/shadcn-ui";
 import { useResponsiveSidebar } from "../hooks/useResponsiveSidebar";
 import { Profile } from "@/widgets/Profile/Profile";
 import { DocumentsList } from "@/widgets/DocumentsList/DocumentsList";
-import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
-import {
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/shared/UI/DropdownMenu";
-import { ListItem } from "@/shared/UI/ListItem";
-import { Dialog, DialogContent, DialogTrigger } from "@/shared/UI/Dialog";
 import { Search } from "@/entities/document/UI/Search";
 
 export const Sidebar = () => {
