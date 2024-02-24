@@ -118,9 +118,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentDto'
+    patch:
+      operationId: DocumentsController_update
+      parameters:
+        - name: id
+          required: true
+          in: query
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDocumentDto'
+      responses:
+        '200':
+          description: ''
     get:
       operationId: DocumentsController_getAll
       parameters: []
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentDto'
+  /documents/findByParent:
+    get:
+      operationId: DocumentsController_getByParentId
+      parameters:
+        - name: parentId
+          required: true
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: ''
@@ -227,13 +262,15 @@ components:
     CreateDocumentDto:
       type: object
       properties:
+        userId:
+          type: string
         title:
           type: string
         parentId:
           type: string
       required:
+        - userId
         - title
-        - parentId
     DocumentDto:
       type: object
       properties:
@@ -264,7 +301,11 @@ components:
         createdAt:
           format: date-time
           type: string
-          example: '2014-02-05'
+          example: '2024-02-05'
+        updatedAt:
+          format: date-time
+          type: string
+          example: '2024-05-05'
         userId:
           type: string
           example: '1'
@@ -278,4 +319,29 @@ components:
         - isPublished
         - isArchived
         - createdAt
+        - updatedAt
         - userId
+    UpdateDocumentDto:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Document title
+        content:
+          type: string
+          example: some_content
+        coverImage:
+          type: string
+          example: link_to_image
+        icon:
+          type: string
+          example: link_to_icon
+        parentId:
+          type: string
+          example: '1'
+        isPublished:
+          type: boolean
+          example: false
+        isArchived:
+          type: boolean
+          example: false
