@@ -19,6 +19,16 @@ export type UpdateParams = {
   id: string;
 };
 
+export interface CreateFavoriteDto {
+  documentId: string;
+  userId: string;
+}
+
+export interface FavoriteDto {
+  documentId: string;
+  userId: string;
+}
+
 export interface UpdateDocumentDto {
   content?: string;
   coverImage?: string;
@@ -38,6 +48,8 @@ export interface DocumentDto {
   id: string;
   isArchived: boolean;
   isPublished: boolean;
+  favoritedBy: FavoriteDto[];
+  childrens: DocumentDto[];
   parentId: string;
   title: string;
   userId: string;
@@ -243,6 +255,31 @@ export const documentsControllerGetByTitle = (
 ) => {
   return createInstance<DocumentDto[]>(
     { url: `/documents/findByTitle`, method: "GET", params },
+    options,
+  );
+};
+
+export const favoritesControllerGetAll = (
+  id: string,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<FavoriteDto[]>(
+    { url: `/favorites/${id}`, method: "GET" },
+    options,
+  );
+};
+
+export const favoritesControllerToggleFavorite = (
+  createFavoriteDto: BodyType<CreateFavoriteDto>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<FavoriteDto>(
+    {
+      url: `/favorites`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data: createFavoriteDto,
+    },
     options,
   );
 };
