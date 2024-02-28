@@ -7,27 +7,30 @@ import { ListItem } from "@/shared/UI/ListItem";
 import { Skeleton } from "@/shared/UI/Skeleton";
 import { EmojiClickData } from "emoji-picker-react";
 
-import { ChevronRight, MoreHorizontal, PlusIcon } from "lucide-react";
+import { ChevronRight, PlusIcon } from "lucide-react";
 import { useState } from "react";
 import { DocumentMenu } from "./DocumentMenu";
+import { useSessionQuery } from "@/entities/session/api/sessionApi";
 
 export const DocumentItem = ({
   id,
   title,
   icon,
   level = 0,
+  isFavorited,
 }: {
   id: string;
   title: string;
   icon: string;
   level?: number;
+  isFavorited: boolean;
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { data: session } = useSessionQuery();
   const { data: documents } = useDocumentsByParentQuery({ parentId: id });
-
   const { create } = useCreateDocument();
-
   const { update } = useUpdateDocument({ id });
+
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const onExpand = () => {
     setIsExpanded(!isExpanded);
@@ -58,7 +61,7 @@ export const DocumentItem = ({
           <div className="ml-1 truncate">{title}</div>
         </div>
         <div className="flex justify-end text-primary gap-1 opacity-0 group-hover:opacity-100">
-          <DocumentMenu />
+          <DocumentMenu documentId={id} isFavorited={isFavorited} />
           <Button
             onClick={() => create({ title: "Untitled", parentId: id })}
             size="icon"
@@ -73,14 +76,20 @@ export const DocumentItem = ({
           {documents?.length ? (
             <div>
               <ul>
-                {documents?.map((document) => (
-                  <DocumentItem
-                    title={document.title}
-                    id={document.id}
-                    icon={document.icon}
-                    level={level + 1}
-                  />
-                ))}
+                {documents?.map((document) => {
+                  const isFavorited = document.favoritedBy.filter(
+                    ({ userId }) => userId === session?.sub,
+                  );
+                  return (
+                    <DocumentItem
+                      title={document.title}
+                      id={document.id}
+                      icon={document.icon}
+                      level={level + 1}
+                      isFavorited={!!isFavorited.length}
+                    />
+                  );
+                })}
               </ul>
             </div>
           ) : (
@@ -99,10 +108,8 @@ export const DocumentItem = ({
 };
 
 DocumentItem.Skeleton = function DocumentItemSkeleton({
-  width,
   level,
 }: {
-  width?: number;
   level?: number;
 }) {
   return (

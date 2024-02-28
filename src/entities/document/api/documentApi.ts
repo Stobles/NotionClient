@@ -15,6 +15,7 @@ export const documentKeys = {
   },
   document: {
     root: ["document"],
+    id: (id: string) => [...documentKeys.document.root, id],
   },
   mutation: {
     create: () => [...documentKeys.document.root, "create"],
