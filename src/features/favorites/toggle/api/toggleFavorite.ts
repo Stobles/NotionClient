@@ -20,7 +20,6 @@ export function useToggleFavorite() {
     },
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: favoritesKeys.favorites.root });
-      queryClient.removeQueries({ queryKey: favoritesKeys.favorites.root });
       queryClient.invalidateQueries({ queryKey: documentKeys.documents.root });
     },
   });

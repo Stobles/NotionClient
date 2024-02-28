@@ -26,6 +26,7 @@ export interface CreateFavoriteDto {
 
 export interface FavoriteDto {
   documentId: string;
+  document: DocumentDto;
   userId: string;
 }
 

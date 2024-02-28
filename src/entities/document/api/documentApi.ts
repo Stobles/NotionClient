@@ -20,6 +20,7 @@ export const documentKeys = {
   mutation: {
     create: () => [...documentKeys.document.root, "create"],
     update: () => [...documentKeys.document.root, "update"],
+    delete: () => [...documentKeys.document.root, "delete"],
   },
 };
 
