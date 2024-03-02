@@ -15,10 +15,12 @@ export const documentKeys = {
   },
   document: {
     root: ["document"],
+    id: (id: string) => [...documentKeys.document.root, id],
   },
   mutation: {
     create: () => [...documentKeys.document.root, "create"],
     update: () => [...documentKeys.document.root, "update"],
+    delete: () => [...documentKeys.document.root, "delete"],
   },
 };
 

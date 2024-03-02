@@ -21,7 +21,7 @@ export const Profile = ({ isFull }: { isFull?: boolean }) => {
         <UserAvatar size={isFull ? "xs" : "default"} src={session?.avatar} />
         {isFull ? (
           <>
-            <div className="text-sm font-semibold truncate">
+            <div className="text-[13px] font-semibold truncate">
               {session?.username}'s Notion
             </div>
             <ChevronsUpDownIcon size={12} />
