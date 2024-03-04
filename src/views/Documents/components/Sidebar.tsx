@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef, ElementRef } from "react";
-import { ChevronsLeft, MenuIcon, SearchIcon, TrashIcon } from "lucide-react";
+import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { cn } from "@/shared/libs/shadcn-ui";
-import { useResponsiveSidebar } from "../hooks/useResponsiveSidebar";
+import { useResponsiveSidebar } from "../../../shared/hooks/useResponsiveSidebar";
 import { Profile } from "@/widgets/Profile/Profile";
-import { DocumentsList } from "@/widgets/DocumentsList/DocumentsList";
+import { DocumentsList } from "@/widgets/DocumentsList";
 import { Search } from "@/entities/document/UI/Search";
+import { Trash } from "@/widgets/Trash";
 
 export const Sidebar = () => {
   const isResizingRef = useRef(false);
@@ -34,6 +35,11 @@ export const Sidebar = () => {
       >
         <div className="w-full">
           <div className="flex items-center w-full gap-1 cursor-pointer text-sm font-medium py-2 px-3 w-full rounded hover:bg-accent transition-colors">
+            <div
+              onMouseDown={handleMouseDown}
+              onClick={resetWidth}
+              className="opacity-0 hover:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0 z-1"
+            />
             <div className="flex-1">
               <Profile isFull />
             </div>
@@ -55,17 +61,13 @@ export const Sidebar = () => {
             <Search />
           </div>
 
-          {/* <SidebarActions /> */}
-
-          <div className="mt-4">
+          <div className="my-4">
             <DocumentsList />
           </div>
 
-          <div
-            onMouseDown={handleMouseDown}
-            onClick={resetWidth}
-            className="opacity-0 hover:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 right-0 top-0 z-1"
-          />
+          <div className="flex flex-col">
+            <Trash />
+          </div>
         </div>
       </aside>
       <div

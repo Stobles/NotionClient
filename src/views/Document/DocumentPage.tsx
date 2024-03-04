@@ -1,3 +1,13 @@
-export const DocumentPage = () => {
-  return <div>Document Page</div>;
+import { Document } from "./components/Document";
+
+export const DocumentPage = ({
+  params: { id },
+}: {
+  params: { id: string };
+}) => {
+  return (
+    <div>
+      <Document id={id} />
+    </div>
+  );
 };
