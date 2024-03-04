@@ -1,16 +1,21 @@
 import {
-  SearchByTitleParams,
-  SearchByParentParams,
+  SearchParams,
   documentsControllerGetAll,
   documentsControllerGetByParentId,
-  documentsControllerGetByTitle,
+  documentsControllerGetById,
+  documentsControllerSearch,
+  DocumentsControllerGetByParentIdParams,
 } from "@/shared/api/generated";
 import { useQuery } from "@tanstack/react-query";
 
 export const documentKeys = {
   documents: {
     root: ["documents"],
-    parent: (parentId: string) => [...documentKeys.documents.root, parentId],
+    archived: () => [...documentKeys.documents.root, "archived"],
+    parent: (parentId: string = "null") => [
+      ...documentKeys.documents.root,
+      parentId,
+    ],
     search: (term: string) => [...documentKeys.documents.root, term],
   },
   document: {
@@ -21,6 +26,8 @@ export const documentKeys = {
     create: () => [...documentKeys.document.root, "create"],
     update: () => [...documentKeys.document.root, "update"],
     delete: () => [...documentKeys.document.root, "delete"],
+    archive: () => [...documentKeys.document.root, "archive"],
+    restore: () => [...documentKeys.document.root, "restore"],
   },
 };
 
@@ -31,16 +38,25 @@ export function useDocumentsQuery() {
   });
 }
 
-export function useDocumentsByParentQuery(params: SearchByParentParams) {
+export function useDocumentByIdQuery(id: string) {
   return useQuery({
-    queryKey: documentKeys.documents.parent(params.parentId),
-    queryFn: () => documentsControllerGetByParentId(params),
+    queryKey: documentKeys.document.id(id),
+    queryFn: () => documentsControllerGetById({ id }),
   });
 }
 
-export function useDocumentsByTitleQuery(params: SearchByTitleParams) {
+export function useDocumentsByParentQuery({
+  parentId,
+}: DocumentsControllerGetByParentIdParams) {
   return useQuery({
-    queryKey: documentKeys.documents.search(params.title),
-    queryFn: () => documentsControllerGetByTitle(params),
+    queryKey: documentKeys.documents.parent(parentId),
+    queryFn: () => documentsControllerGetByParentId({ parentId }),
+  });
+}
+
+export function useDocumentsSearch(params: SearchParams) {
+  return useQuery({
+    queryKey: documentKeys.documents.search(params.query),
+    queryFn: () => documentsControllerSearch(params),
   });
 }

@@ -1,4 +1,5 @@
 import { useSessionQuery } from "@/entities/session/api/sessionApi";
+import { useArchiveDocument } from "@/features/documents/archive";
 import { useDeleteDocument } from "@/features/documents/delete/api/deleteDocument";
 import { useToggleFavorite } from "@/features/favorites/toggle";
 import {
@@ -8,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/shared/UI/DropdownMenu";
 import { Separator } from "@/shared/UI/Separator";
-import { useCopyToClipboard } from "@/views/Documents/hooks/useCopyToClipboard";
+import { useCopyToClipboard } from "@/shared/hooks/useCopyToClipboard";
 import {
   CopyIcon,
   Link2Icon,
@@ -19,26 +20,39 @@ import {
   StarOffIcon,
   TrashIcon,
 } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 export const DocumentMenu = ({
   documentId,
   isFavorited,
+  documentLink,
 }: {
   documentId: string;
   isFavorited: boolean;
+  documentLink: string;
 }) => {
   const { data: session } = useSessionQuery();
   const { update } = useToggleFavorite();
-  const { deleteDocument } = useDeleteDocument();
+  const { archive } = useArchiveDocument();
   const { copy } = useCopyToClipboard();
+  const pathname = usePathname();
+  const router = useRouter();
 
-  const linkToDocument = `${process.env.CLIENT_BASE_URL}/documents/${documentId}`;
-
-  const onUpdate = () =>
+  const onUpdate = () => {
     update({ userId: session ? session.sub : "", documentId });
-  const onCopyLink = () => copy(linkToDocument);
-  const onDelete = () => deleteDocument(documentId);
-  const onOpenNewTab = () => window.open(linkToDocument, "_blank");
+  };
+  const onCopyLink = () => {
+    copy(documentLink);
+  };
+  const onDelete = () => {
+    archive(documentId);
+    if (pathname === `/documents/${documentId}`) {
+      router.back();
+    }
+  };
+  const onOpenNewTab = () => {
+    window.open(documentLink, "_blank");
+  };
 
   return (
     <DropdownMenu>
@@ -53,7 +67,11 @@ export const DocumentMenu = ({
             <StarIcon size={17} className="mr-1" />
           )}
 
-          <div className="mx-1">Add to favorites</div>
+          {isFavorited ? (
+            <div className="mx-1">Remove from favorites</div>
+          ) : (
+            <div className="mx-1">Add to favorites</div>
+          )}
         </DropdownMenuItem>
         <Separator className="my-1.5" />
         <DropdownMenuItem onClick={onCopyLink} className="py-1 mx-1">

@@ -1,12 +1,11 @@
 import { useSessionQuery } from "@/entities/session/api/sessionApi";
 import { DocumentDto } from "@/shared/api/generated";
 import { ChangeEvent, Dispatch, useEffect, useState } from "react";
-import { useDocumentsByTitleQuery } from "..";
+import { useDocumentsSearch } from "..";
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { DialogHeader } from "@/shared/UI/Dialog";
 import { SearchIcon } from "lucide-react";
 import { Input } from "@/shared/UI/Input";
-import { Separator } from "@radix-ui/react-dropdown-menu";
 
 export const SearchInput = ({
   setDocuments,
@@ -16,9 +15,13 @@ export const SearchInput = ({
   const [title, setTitle] = useState("");
   const [term, setTerm] = useState("");
   const { data: session } = useSessionQuery();
-  const { data: documents } = useDocumentsByTitleQuery({
-    title: term,
+  const { data: documents } = useDocumentsSearch({
+    query: term,
     limit: 10,
+    sort: {
+      field: "updatedAt",
+      type: "desc",
+    },
   });
   const debounce = useDebounce((title: string) => setTerm(title), 300);
 

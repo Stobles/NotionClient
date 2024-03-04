@@ -16,7 +16,7 @@ const DocumentsPage = () => {
         className=""
         alt="empty"
       ></Image>
-      <h2 className="text-lg font-medium">Welcome to yours Stobletion</h2>n{" "}
+      <h2 className="text-lg font-medium">Welcome to yours Stobletion</h2>{" "}
       <Button onClick={() => create({ title: "Untitled" })}>
         <PlusCircle className="h-4 w-4 mr-2" />
         Create a note

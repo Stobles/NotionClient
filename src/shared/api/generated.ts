@@ -6,13 +6,12 @@
  */
 import { createInstance } from "./api-instance";
 import type { BodyType } from "./api-instance";
-export type SearchByTitleParams = {
-  title: string;
-  limit: number;
+export type DocumentsControllerGetByParentIdParams = {
+  parentId?: string;
 };
 
-export type SearchByParentParams = {
-  parentId: string;
+export type DocumentsControllerGetByIdParams = {
+  id: string;
 };
 
 export type UpdateParams = {
@@ -30,6 +29,30 @@ export interface FavoriteDto {
   userId: string;
 }
 
+export type SortTypeType = (typeof SortTypeType)[keyof typeof SortTypeType];
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const SortTypeType = {
+  asc: "asc",
+  desc: "desc",
+} as const;
+
+export interface SortType {
+  field?: string;
+  type?: SortTypeType;
+}
+
+export interface FilterType {
+  isArchived?: boolean;
+}
+
+export interface SearchParams {
+  filters?: FilterType;
+  limit?: number;
+  query: string;
+  sort?: SortType;
+}
+
 export interface UpdateDocumentDto {
   content?: string;
   coverImage?: string;
@@ -41,24 +64,25 @@ export interface UpdateDocumentDto {
 }
 
 export interface DocumentDto {
+  childrens: DocumentDto[];
+  favoritedBy: FavoriteDto[];
   content: string;
   coverImage: string;
   createdAt: string;
-  updatedAt: string;
   icon: string;
   id: string;
   isArchived: boolean;
   isPublished: boolean;
-  favoritedBy: FavoriteDto[];
-  childrens: DocumentDto[];
   parentId: string;
   title: string;
+  updatedAt: string;
   userId: string;
 }
 
 export interface CreateDocumentDto {
   parentId?: string;
   title: string;
+  userId?: string;
 }
 
 export interface GetSessionInfoDto {
@@ -240,22 +264,76 @@ export const documentsControllerGetAll = (
   );
 };
 
-export const documentsControllerGetByParentId = (
-  params: SearchByParentParams,
+export const documentsControllerDelete = (
+  id: string,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<DocumentDto[]>(
-    { url: `/documents/findByParent`, method: "GET", params },
+  return createInstance<DocumentDto>(
+    { url: `/documents/${id}`, method: "DELETE" },
     options,
   );
 };
 
-export const documentsControllerGetByTitle = (
-  params: SearchByTitleParams,
+export const documentsControllerGetById = (
+  params: DocumentsControllerGetByIdParams,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<DocumentDto>(
+    { url: `/documents/getById`, method: "GET", params },
+    options,
+  );
+};
+
+export const documentsControllerGetByParentId = (
+  params?: DocumentsControllerGetByParentIdParams,
   options?: SecondParameter<typeof createInstance>,
 ) => {
   return createInstance<DocumentDto[]>(
-    { url: `/documents/findByTitle`, method: "GET", params },
+    { url: `/documents/getByParentId`, method: "GET", params },
+    options,
+  );
+};
+
+export const documentsControllerGetArchived = (
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<DocumentDto[]>(
+    { url: `/documents/getArchived`, method: "GET" },
+    options,
+  );
+};
+
+export const documentsControllerArchive = (
+  id: string,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    { url: `/documents/archive/${id}`, method: "PATCH" },
+    options,
+  );
+};
+
+export const documentsControllerRestore = (
+  id: string,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<void>(
+    { url: `/documents/restore/${id}`, method: "PATCH" },
+    options,
+  );
+};
+
+export const documentsControllerSearch = (
+  searchParams: BodyType<SearchParams>,
+  options?: SecondParameter<typeof createInstance>,
+) => {
+  return createInstance<DocumentDto[]>(
+    {
+      url: `/documents/search`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data: searchParams,
+    },
     options,
   );
 };
@@ -324,9 +402,21 @@ export type DocumentsControllerUpdateResult = NonNullable<
 export type DocumentsControllerGetAllResult = NonNullable<
   Awaited<ReturnType<typeof documentsControllerGetAll>>
 >;
+export type DocumentsControllerDeleteResult = NonNullable<
+  Awaited<ReturnType<typeof documentsControllerDelete>>
+>;
+export type DocumentsControllerGetByIdResult = NonNullable<
+  Awaited<ReturnType<typeof documentsControllerGetById>>
+>;
 export type DocumentsControllerGetByParentIdResult = NonNullable<
   Awaited<ReturnType<typeof documentsControllerGetByParentId>>
 >;
-export type DocumentsControllerGetByTitleResult = NonNullable<
-  Awaited<ReturnType<typeof documentsControllerGetByTitle>>
+export type DocumentsControllerSearchResult = NonNullable<
+  Awaited<ReturnType<typeof documentsControllerSearch>>
+>;
+export type FavoritesControllerGetAllResult = NonNullable<
+  Awaited<ReturnType<typeof favoritesControllerGetAll>>
+>;
+export type FavoritesControllerToggleFavoriteResult = NonNullable<
+  Awaited<ReturnType<typeof favoritesControllerToggleFavorite>>
 >;
