@@ -1,4 +1,5 @@
 import { documentKeys } from "@/entities/document";
+import { favoritesKeys } from "@/entities/favorites";
 import {
   CreateDocumentDto,
   documentsControllerArchive,
@@ -15,6 +16,9 @@ export function useArchiveDocument() {
     mutationKey: documentKeys.mutation.archive(),
     mutationFn: (documentId: string) => documentsControllerArchive(documentId),
     onError: (e: AxiosError) => {
+      if (e.response?.status === 400) {
+        return toast.error("Вы не можете удалить последний документ.");
+      }
       if (e.response?.status === 404) {
         return toast.error("Документ не был найден.");
       }
@@ -23,6 +27,7 @@ export function useArchiveDocument() {
     onSuccess() {
       toast.info("Документ был перемещен в корзину.");
       queryClient.invalidateQueries({ queryKey: documentKeys.documents.root });
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.favorites.root });
       queryClient.invalidateQueries({
         queryKey: documentKeys.documents.archived(),
       });

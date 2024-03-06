@@ -21,7 +21,7 @@ export function useDeleteDocument() {
     onSuccess() {
       toast.success("Документ успешно удален");
       queryClient.invalidateQueries({ queryKey: documentKeys.documents.root });
-      queryClient.removeQueries({ queryKey: documentKeys.document.root });
+      queryClient.invalidateQueries({ queryKey: documentKeys.document.root });
     },
   });
 

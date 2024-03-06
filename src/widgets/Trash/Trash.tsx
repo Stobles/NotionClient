@@ -30,6 +30,7 @@ export const Trash = () => {
                       key={document.id}
                       id={document.id}
                       title={document.title}
+                      parentTitle={document?.parent?.title || null}
                       emojiSrc={document.icon || ""}
                     />
                   </li>
