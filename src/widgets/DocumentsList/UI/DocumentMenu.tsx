@@ -1,6 +1,5 @@
 import { useSessionQuery } from "@/entities/session/api/sessionApi";
 import { useArchiveDocument } from "@/features/documents/archive";
-import { useDeleteDocument } from "@/features/documents/delete/api/deleteDocument";
 import { useToggleFavorite } from "@/features/favorites/toggle";
 import {
   DropdownMenu,
@@ -21,25 +20,28 @@ import {
   TrashIcon,
 } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
 export const DocumentMenu = ({
   documentId,
   isFavorited,
   documentLink,
+  setIsOpen,
 }: {
   documentId: string;
   isFavorited: boolean;
   documentLink: string;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { data: session } = useSessionQuery();
-  const { update } = useToggleFavorite();
+  const { toggle } = useToggleFavorite();
   const { archive } = useArchiveDocument();
   const { copy } = useCopyToClipboard();
   const pathname = usePathname();
   const router = useRouter();
 
-  const onUpdate = () => {
-    update({ userId: session ? session.sub : "", documentId });
+  const onFavorite = () => {
+    toggle({ userId: session ? session.sub : "", documentId });
   };
   const onCopyLink = () => {
     copy(documentLink);
@@ -56,11 +58,11 @@ export const DocumentMenu = ({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex justify-center w-5 h-5 hover:bg-accent-dark rounded-sm transition-colors">
+      <DropdownMenuTrigger className="flex justify-center w-5 h-5 hover:bg-accent-dark rounded-sm transition-colors mr-2 md:mr-0">
         <MoreHorizontal size={18} />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-[265px] py-1.5 px-0">
-        <DropdownMenuItem onClick={onUpdate} className="py-1 mx-1">
+        <DropdownMenuItem onClick={onFavorite} className="py-1 mx-1">
           {isFavorited ? (
             <StarOffIcon size={17} className="mr-1" />
           ) : (
@@ -82,8 +84,9 @@ export const DocumentMenu = ({
           <CopyIcon size={17} className="mr-1" />
           <div className="mx-1">Duplicate</div>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => {}} className="py-1 mx-1">
+        <DropdownMenuItem onClick={() => setIsOpen(true)} className="py-1 mx-1">
           <PenSquare size={17} className="mr-1" />
+
           <div className="mx-1">Rename</div>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={onDelete} className="py-1 mx-1">

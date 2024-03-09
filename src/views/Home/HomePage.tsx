@@ -1,6 +1,6 @@
-import Customers from "./components/Customers";
-import Heroes from "./components/Heroes";
-import Slider from "./components/Slider";
+import Customers from "./UI/Customers";
+import Heroes from "./UI/Heroes";
+import Slider from "./UI/Slider";
 
 function HomePage() {
   return (

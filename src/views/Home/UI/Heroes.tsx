@@ -31,6 +31,7 @@ const Heroes = () => {
                 fill
                 className="!relative w-full object-bottom object-contain dark:hidden"
                 alt="documents"
+                priority
               />
             </div>
           </div>
