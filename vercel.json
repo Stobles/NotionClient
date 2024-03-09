@@ -1,11 +1,4 @@
 {
-  "env": {
-    "SERVER_BASE_URL": "https://api.stoble.ru",
-    "CLIENT_BASE_URL": "https://stoble.ru",
-    "UPLOADTHING_SECRET":
-      "sk_live_b17fc24dc5ef37f5fd5acf97ff8a0ffc6fad8b1d4fa79ae14aae38b315162a57",
-    "UPLOADTHING_APP_ID": "jbbz3rwknz",
-  },
   "rewrites": [
     {
       "source": "/api/:path*",
