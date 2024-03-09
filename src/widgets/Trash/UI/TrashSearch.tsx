@@ -12,7 +12,6 @@ export const TrashSearch = ({
 }) => {
   const [title, setTitle] = useState("");
   const [term, setTerm] = useState("");
-  const { data: session } = useSessionQuery();
   const { data: documents } = useDocumentsSearch({
     query: term,
     limit: 10,

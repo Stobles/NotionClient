@@ -37,7 +37,7 @@ export const TrashItem = ({
           )}
           {!emojiSrc && <FileIcon size={18} />}
         </div>
-        <div className="flex flex-col text-center justify-center gap-1 font-normal text-black">
+        <div className="flex flex-col text-start justify-center gap-1 font-normal text-black">
           <span className="truncate">{title}</span>
           {parentTitle && (
             <span className="text-xs text-primary-third">{parentTitle}</span>
