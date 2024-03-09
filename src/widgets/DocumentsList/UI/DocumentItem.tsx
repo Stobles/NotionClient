@@ -74,7 +74,7 @@ export const DocumentItem = ({
           <div>
             <EmojiPopover id={id} icon={icon} />
           </div>
-          <Link href={documentLink} className="w-full ml-1 truncate">
+          <Link href={`/documents/${id}`} className="w-full ml-1 truncate">
             <div className="truncate">{title}</div>
           </Link>
         </div>
