@@ -1,10 +1,12 @@
 import { documentKeys } from "@/entities/document";
+import { favoritesKeys } from "@/entities/favorites";
 import {
   UpdateDocumentDto,
   UpdateParams,
   documentsControllerUpdate,
 } from "@/shared/api/generated";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { toast } from "sonner";
 
 export function useUpdateDocument(params: UpdateParams) {
@@ -13,13 +15,16 @@ export function useUpdateDocument(params: UpdateParams) {
     mutationKey: documentKeys.mutation.update(),
     mutationFn: (data: UpdateDocumentDto) =>
       documentsControllerUpdate(data, params),
-    onError: () => {
+    onError: (e: AxiosError) => {
+      console.log(e);
       toast.error("Ошибка");
     },
     onSuccess() {
-      toast.success("Документ успешно изменен");
       queryClient.invalidateQueries({ queryKey: documentKeys.documents.root });
-      queryClient.removeQueries({ queryKey: documentKeys.document.root });
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.favorites.root });
+      queryClient.invalidateQueries({
+        queryKey: documentKeys.document.id(params.id),
+      });
     },
   });
 

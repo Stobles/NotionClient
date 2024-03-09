@@ -1,10 +1,10 @@
-interface HomePageLayout {
-  children: React.ReactNode,
-  header?: React.ReactNode,
-  footer?: React.ReactNode, 
+interface HomeLayout {
+  children: React.ReactNode;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
 }
 
-export const HomeLayout = ({ children, header, footer } : HomePageLayout) => {
+export const HomeLayout = ({ children, header, footer }: HomeLayout) => {
   return (
     <div className="min-h-full flex flex-col justify-between dark:bg-[#1F1F1F]">
       {header}
@@ -15,5 +15,5 @@ export const HomeLayout = ({ children, header, footer } : HomePageLayout) => {
       </main>
       {footer}
     </div>
-  )
-}
+  );
+};

@@ -16,26 +16,25 @@ export const Trash = () => {
         <ListItem Icon={TrashIcon} title="Trash" />
       </PopoverTrigger>
       <PopoverContent
-        className="w-[400px] p-0"
+        className="w-[300px] sm:w-[400px] p-0"
         side={isMobile ? "bottom" : "right"}
       >
         <TrashSearch setDocuments={setDocuments} />
         <div className="mb-2 h-[200px] overflow-y-auto">
           {documents.length ? (
-            <>
-              <ul className="">
-                {documents.map((document) => (
-                  <li className="px-1">
-                    <TrashItem
-                      key={document.id}
-                      id={document.id}
-                      title={document.title}
-                      emojiSrc={document.icon || ""}
-                    />
-                  </li>
-                ))}
-              </ul>
-            </>
+            <ul>
+              {documents.map((document) => (
+                <li className="px-1">
+                  <TrashItem
+                    key={document.id}
+                    id={document.id}
+                    title={document.title}
+                    parentTitle={document?.parent?.title || null}
+                    emojiSrc={document.icon || ""}
+                  />
+                </li>
+              ))}
+            </ul>
           ) : (
             <div className="flex flex-col items-center justify-center h-full">
               <TrashIcon size={40} />
@@ -47,7 +46,7 @@ export const Trash = () => {
           )}
         </div>
 
-        <div className="flex items-center text-xs text-primary-third px-4 border-t-[1px] h-[35px]">
+        <div className="flex items-center text-xs text-primary-third px-4 py-2 border-t-[1px]">
           <span>This is your trash. You can restore or delete any page.</span>
         </div>
       </PopoverContent>

@@ -50,6 +50,7 @@ export interface SearchParams {
   filters?: FilterType;
   limit?: number;
   query: string;
+  parent?: boolean;
   sort?: SortType;
 }
 
@@ -66,6 +67,7 @@ export interface UpdateDocumentDto {
 export interface DocumentDto {
   childrens: DocumentDto[];
   favoritedBy: FavoriteDto[];
+  parent: DocumentDto;
   content: string;
   coverImage: string;
   createdAt: string;

@@ -1,4 +1,5 @@
 import { documentKeys } from "@/entities/document";
+import { favoritesKeys } from "@/entities/favorites";
 import { documentsControllerRestore } from "@/shared/api/generated";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -21,6 +22,7 @@ export function useRestoreDocument() {
     onSuccess() {
       toast.info("Документ был восстановлен");
       queryClient.invalidateQueries({ queryKey: documentKeys.documents.root });
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.favorites.root });
       queryClient.invalidateQueries({
         queryKey: documentKeys.documents.archived(),
       });

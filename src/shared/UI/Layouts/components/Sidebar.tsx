@@ -3,11 +3,12 @@
 import { useRef, ElementRef } from "react";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { cn } from "@/shared/libs/shadcn-ui";
-import { useResponsiveSidebar } from "../../../shared/hooks/useResponsiveSidebar";
+import { useResponsiveSidebar } from "../../../hooks/useResponsiveSidebar";
 import { Profile } from "@/widgets/Profile/Profile";
 import { DocumentsList } from "@/widgets/DocumentsList";
 import { Search } from "@/entities/document/UI/Search";
 import { Trash } from "@/widgets/Trash";
+import { Navbar } from "./Navbar";
 
 export const Sidebar = () => {
   const isResizingRef = useRef(false);
@@ -73,20 +74,12 @@ export const Sidebar = () => {
       <div
         ref={navbarRef}
         className={cn(
-          "absolute top-0 z-[99999] left-60 w-[calc(100%-270px)]",
+          "absolute top-0 z-[99] left-60 w-[calc(100%-270px)] h-12 bg-white",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "left-0 w-full",
         )}
       >
-        <nav className="bg-transparent px-3 py-2 w-full ">
-          {isCollapsed && (
-            <MenuIcon
-              onClick={resetWidth}
-              role="button"
-              className="h-6 w-6 text-muted-foreground"
-            />
-          )}
-        </nav>
+        <Navbar isCollapsed={isCollapsed} resetWidth={resetWidth} />
       </div>
     </>
   );

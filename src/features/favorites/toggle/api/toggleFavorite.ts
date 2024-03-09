@@ -11,7 +11,7 @@ import { toast } from "sonner";
 export function useToggleFavorite() {
   const queryClient = useQueryClient();
 
-  const { mutate: update } = useMutation({
+  const { mutate: toggle } = useMutation({
     mutationKey: favoritesKeys.mutation.toggle(),
     mutationFn: (data: CreateFavoriteDto) =>
       favoritesControllerToggleFavorite(data),
@@ -24,5 +24,5 @@ export function useToggleFavorite() {
     },
   });
 
-  return { update };
+  return { toggle };
 }

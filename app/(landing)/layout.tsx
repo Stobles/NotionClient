@@ -1,7 +1,7 @@
 "use client";
 
 import { Header } from "@/widgets/Header";
-import { Footer } from "@/views/Home";
+import { Footer } from "@/shared/UI/Layouts/components/Footer";
 import { HomeLayout } from "@/shared/UI/Layouts/HomeLayout";
 import { Profile } from "@/widgets/Profile/Profile";
 

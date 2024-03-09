@@ -3,8 +3,6 @@ import { DocumentDto } from "@/shared/api/generated";
 import { ChangeEvent, Dispatch, useEffect, useState } from "react";
 import { useDocumentsSearch } from "@/entities/document";
 import { useDebounce } from "@/shared/hooks/useDebounce";
-import { DialogHeader } from "@/shared/UI/Dialog";
-import { SearchIcon } from "lucide-react";
 import { Input } from "@/shared/UI/Input";
 
 export const TrashSearch = ({
@@ -14,10 +12,10 @@ export const TrashSearch = ({
 }) => {
   const [title, setTitle] = useState("");
   const [term, setTerm] = useState("");
-  const { data: session } = useSessionQuery();
   const { data: documents } = useDocumentsSearch({
     query: term,
     limit: 10,
+    parent: true,
     sort: {
       field: "updatedAt",
       type: "desc",
