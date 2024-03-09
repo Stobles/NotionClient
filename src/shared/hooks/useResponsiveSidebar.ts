@@ -63,7 +63,8 @@ export const useResponsiveSidebar = (
         "width",
         isMobile ? "0" : "calc(100% - 270px)",
       );
-      navbarRef.current.style.setProperty("left", isMobile ? "50%" : "270px");
+      navbarRef.current.style.setProperty("left", isMobile ? "100%" : "270px");
+      if (isMobile) navbarRef.current.style.setProperty("display", "none");
 
       setTimeout(() => setIsResetting(false), 300);
     }
@@ -79,6 +80,10 @@ export const useResponsiveSidebar = (
 
       navbarRef.current.style.setProperty("width", "100%");
       navbarRef.current.style.setProperty("left", "0");
+      setTimeout(
+        () => navbarRef?.current?.style.setProperty("display", "block"),
+        200,
+      );
       setTimeout(() => setIsResetting(false), 300);
     }
   }, [sidebarRef, navbarRef]);
