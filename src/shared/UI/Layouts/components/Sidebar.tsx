@@ -74,7 +74,7 @@ export const Sidebar = () => {
       <div
         ref={navbarRef}
         className={cn(
-          "absolute top-0 z-[99] left-60 w-[calc(100%-270px)] h-12 bg-white",
+          "absolute top-0 z-[51] left-60 w-[calc(100%-270px)] h-12 bg-white",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "left-0 w-full",
         )}
