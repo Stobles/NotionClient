@@ -309,7 +309,7 @@ export const documentsControllerArchive = (
   id: string,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<void>(
+  return createInstance<DocumentDto>(
     { url: `/documents/archive/${id}`, method: "PATCH" },
     options,
   );
@@ -319,7 +319,7 @@ export const documentsControllerRestore = (
   id: string,
   options?: SecondParameter<typeof createInstance>,
 ) => {
-  return createInstance<void>(
+  return createInstance<DocumentDto>(
     { url: `/documents/restore/${id}`, method: "PATCH" },
     options,
   );
