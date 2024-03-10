@@ -15,7 +15,7 @@ const DocumentsPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (documents) router.push(`documents/${documents[0].id}`);
+    if (documents?.length) router.push(`documents/${documents[0].id}`);
   }, [documents]);
   return (
     <div className="h-full flex flex-col items-center justify-center space-y-4">
