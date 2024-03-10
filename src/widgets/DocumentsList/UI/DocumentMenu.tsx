@@ -37,8 +37,6 @@ export const DocumentMenu = ({
   const { toggle } = useToggleFavorite();
   const { archive } = useArchiveDocument();
   const { copy } = useCopyToClipboard();
-  const pathname = usePathname();
-  const router = useRouter();
 
   const onFavorite = () => {
     toggle({ userId: session ? session.sub : "", documentId });
@@ -48,9 +46,6 @@ export const DocumentMenu = ({
   };
   const onDelete = () => {
     archive(documentId);
-    if (pathname === `/documents/${documentId}`) {
-      router.back();
-    }
   };
   const onOpenNewTab = () => {
     window.open(documentLink, "_blank");
