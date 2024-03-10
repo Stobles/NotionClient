@@ -15,7 +15,8 @@ export function useArchiveDocument() {
 
   const { mutate: archive } = useMutation({
     mutationKey: documentKeys.mutation.archive(),
-    mutationFn: (documentId: string) => documentsControllerArchive(documentId),
+    mutationFn: (documentId: string): Promise<DocumentDto> =>
+      documentsControllerArchive(documentId),
     onError: (e: AxiosError) => {
       if (e.response?.status === 400) {
         return toast.error("Вы не можете удалить последний документ.");
