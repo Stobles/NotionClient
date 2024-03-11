@@ -26,7 +26,7 @@ export const DocumentTitle = ({ id, title }: { id: string; title: string }) => {
       <Input
         onChange={(e: ChangeEvent<HTMLInputElement>) => setText(e.target.value)}
         value={text}
-        className="border-0 text-3xl md:text-[40px] h-[45px] rounded-sm px-1"
+        className="border-0 text-3xl md:text-[40px] h-[45px] rounded-sm px-1 py-0"
       />
     </div>
   );
