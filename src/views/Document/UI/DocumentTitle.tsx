@@ -16,6 +16,10 @@ export const DocumentTitle = ({ id, title }: { id: string; title: string }) => {
     if (text != title) debounce(text);
   }, [text]);
 
+  useEffect(() => {
+    setText(title);
+  }, [title]);
+
   return (
     <div className="relative text-4xl font-bold">
       <h1 className="absolute opacity-0 pointer-events-none">{title}</h1>

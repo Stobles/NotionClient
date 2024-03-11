@@ -3,13 +3,12 @@
 import { DocumentTitle } from "./DocumentTitle";
 import { useDocumentByIdQuery } from "@/entities/document";
 import { EmojiPopover } from "@/features/documents/update/UI/EmojiPopover";
-import { useUpdateDocument } from "@/features/documents/update";
 import Image from "next/image";
 import { UploadCoverButton } from "./UploadCoverButton";
+import { useEffect } from "react";
 
 export const Document = ({ id }: { id: string }) => {
   const { data: document } = useDocumentByIdQuery(id);
-  const { update } = useUpdateDocument({ id });
 
   const title = document?.title || "";
 
