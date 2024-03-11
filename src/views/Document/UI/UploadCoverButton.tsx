@@ -29,7 +29,7 @@ export const UploadCoverButton = ({ documentId }: { documentId: string }) => {
         toast.error(error.message);
       }}
       className={`
-                opacity-0 group-hover:opacity-100 transition-opacity
+                lg:opacity-0 lg:group-hover:opacity-100 transition-opacity
                 text-sm ut-allowed-content:hidden ut-button:bg-white 
                 ut-button:text-primary-second ut-button:h-fit ut-button:w-auto 
                 ut-button:p-1 ut-button:rounded-sm ut-button:focus-within:ring-offset-0 ut-button:focus:ring-offset-0 ut-button:hover:bg-accent 
