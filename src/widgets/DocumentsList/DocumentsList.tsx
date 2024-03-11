@@ -39,6 +39,7 @@ export const DocumentsList = () => {
                         icon={favorite.document.icon}
                         level={0}
                         isFavorited={true}
+                        updatedAt={favorite.document.updatedAt}
                       />
                     );
                   })}
