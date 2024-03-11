@@ -78,7 +78,7 @@ export const DocumentItem = ({
             <div className="truncate">{title}</div>
           </Link>
         </div>
-        <div className="flex justify-end text-primary gap-1 md:opacity-0 md:group-hover:opacity-100">
+        <div className="flex justify-end text-primary gap-1 lg:opacity-0 lg:group-hover:opacity-100">
           <DocumentMenu
             documentId={id}
             isFavorited={isFavorited}
