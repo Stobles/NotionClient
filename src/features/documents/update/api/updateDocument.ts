@@ -20,8 +20,8 @@ export function useUpdateDocument(params: UpdateParams) {
       toast.error("Ошибка");
     },
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: documentKeys.documents.root });
       queryClient.invalidateQueries({ queryKey: favoritesKeys.favorites.root });
+      queryClient.invalidateQueries({ queryKey: documentKeys.documents.root });
       queryClient.invalidateQueries({
         queryKey: documentKeys.document.id(params.id),
       });

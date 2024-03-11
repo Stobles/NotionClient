@@ -1,3 +1,4 @@
+import { Editor } from "@/widgets/Editor";
 import { Document } from "./UI/Document";
 
 export const DocumentPage = ({
@@ -5,5 +6,9 @@ export const DocumentPage = ({
 }: {
   params: { id: string };
 }) => {
-  return <Document id={id} />;
+  return (
+    <>
+      <Document id={id} />
+    </>
+  );
 };
