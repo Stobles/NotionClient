@@ -26,11 +26,13 @@ export const DocumentMenu = ({
   documentId,
   isFavorited,
   documentLink,
+  updatedAt,
   setIsOpen,
 }: {
   documentId: string;
   isFavorited: boolean;
   documentLink: string;
+  updatedAt: string;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const { data: session } = useSessionQuery();
@@ -95,8 +97,8 @@ export const DocumentMenu = ({
         </DropdownMenuItem>
         <Separator className="my-1.5" />
         <div className="text-xs mx-3 mt-2.5 text-primary-third">
-          <div className="mb-1">Last edited by Stoble</div>
-          <div>Dec 15, 2023, 5:29 PM</div>
+          <div className="mb-1">Last edited by {session?.username}</div>
+          <div>{new Date(updatedAt).toUTCString().replace("GMT", "")}</div>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>

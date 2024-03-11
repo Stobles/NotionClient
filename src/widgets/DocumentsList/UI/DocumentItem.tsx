@@ -19,11 +19,13 @@ export const DocumentItem = ({
   icon,
   level = 0,
   isFavorited,
+  updatedAt,
 }: {
   id: string;
   title: string;
   icon: string;
   level?: number;
+  updatedAt: string;
   isFavorited: boolean;
 }) => {
   const { create } = useCreateDocument();
@@ -84,6 +86,7 @@ export const DocumentItem = ({
             isFavorited={isFavorited}
             documentLink={documentLink}
             setIsOpen={setIsOpen}
+            updatedAt={updatedAt}
           />
           <Button
             onClick={() => create({ title: "Untitled", parentId: id })}

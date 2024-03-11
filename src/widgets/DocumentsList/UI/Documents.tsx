@@ -32,6 +32,7 @@ export const Documents = ({
                   icon={document.icon}
                   level={level}
                   isFavorited={!!isFavorited.length}
+                  updatedAt={document?.updatedAt}
                 />
               );
             })}
