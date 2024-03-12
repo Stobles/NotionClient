@@ -4,8 +4,6 @@ import { formatTimeToNow, useDocumentByIdQuery } from "@/entities/document";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Rename } from "@/features/documents/update/UI/Rename";
-import { useUpdateDocument } from "@/features/documents/update";
-import { useToggleFavorite } from "@/features/favorites/toggle";
 import { NavbarActions } from "./NavbarActions";
 import Image from "next/image";
 import { useMediaQuery } from "usehooks-ts";
@@ -18,15 +16,12 @@ export const Navbar = ({
   resetWidth: () => void;
 }) => {
   const isMobile = useMediaQuery("(max-width: 480px)");
-
   const pathname = usePathname();
 
   const documentId = pathname.split("/")[2];
 
-  const { data: document } = useDocumentByIdQuery(documentId);
+  const { data: document, isFetched } = useDocumentByIdQuery(documentId);
   const [isOpen, setIsOpen] = useState(false);
-
-  const title = document?.title || "";
   return (
     <nav className="flex items-center justify-between bg-transparent px-3 py-2 w-full h-full">
       <div className="flex items-center gap-1 flex-1">
@@ -37,7 +32,7 @@ export const Navbar = ({
             className="h-6 w-6 text-muted-foreground"
           />
         )}
-        {!isMobile && (
+        {isFetched ? (
           <Button
             className="flex gap-2"
             variant="ghost"
@@ -56,18 +51,22 @@ export const Navbar = ({
             )}
             {document?.title}
           </Button>
+        ) : (
+          <Rename.Skeleton />
         )}
 
-        <Rename
-          id={documentId}
-          name={title}
-          icon={document?.icon || ""}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        />
+        {isFetched && (
+          <Rename
+            id={documentId}
+            name={document?.title || ""}
+            icon={document?.icon || ""}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
+        )}
       </div>
       <div className="flex gap-2 items-center text-primary-second">
-        {document?.updatedAt && (
+        {document?.updatedAt && !isMobile && (
           <div className="text-sm">
             Edited <span>{formatTimeToNow(new Date(document.updatedAt))}</span>
           </div>
