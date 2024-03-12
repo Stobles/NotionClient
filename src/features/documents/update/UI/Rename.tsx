@@ -11,6 +11,7 @@ import {
   useState,
 } from "react";
 import { useUpdateDocument } from "..";
+import { Skeleton } from "@/shared/UI/Skeleton";
 
 export const Rename = ({
   id,
@@ -54,5 +55,14 @@ export const Rename = ({
         />
       </PopoverContent>
     </Popover>
+  );
+};
+
+Rename.Skeleton = () => {
+  return (
+    <div className="flex items-center gap-1.5">
+      <Skeleton className="rounded-sm w-5 h-5" />
+      <Skeleton className="rounded-md w-10 h-2.5" />
+    </div>
   );
 };
