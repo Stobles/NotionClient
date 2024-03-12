@@ -34,7 +34,7 @@ export function useArchiveDocument() {
         queryKey: documentKeys.documents.archived(),
       });
 
-      if (pathname === `/documents/${data.id}}`) {
+      if (pathname === `/documents/${data.id}`) {
         router.back();
       }
     },
