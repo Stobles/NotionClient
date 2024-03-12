@@ -42,9 +42,6 @@ export const Profile = ({ isFull }: { isFull?: boolean }) => {
         </div>
         <DropdownMenuSeparator className="m-0" />
         <div className="text-primary-third p-1 bg-secondary">
-          <DropdownMenuItem className="font-normal text-xs">
-            Settings
-          </DropdownMenuItem>
           <DropdownMenuItem
             disabled={isLoading}
             onClick={() => signOut()}
