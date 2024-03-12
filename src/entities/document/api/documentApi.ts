@@ -16,7 +16,11 @@ export const documentKeys = {
       ...documentKeys.documents.root,
       parentId,
     ],
-    search: (term: string) => [...documentKeys.documents.root, term],
+    search: (term: string, isArchived: boolean) => [
+      ...documentKeys.documents.root,
+      term,
+      isArchived,
+    ],
   },
   document: {
     root: ["document"],
@@ -56,7 +60,10 @@ export function useDocumentsByParentQuery({
 
 export function useDocumentsSearch(params: SearchParams) {
   return useQuery({
-    queryKey: documentKeys.documents.search(params.query),
+    queryKey: documentKeys.documents.search(
+      params.query,
+      params.filters?.isArchived || false,
+    ),
     queryFn: () => documentsControllerSearch(params),
   });
 }
